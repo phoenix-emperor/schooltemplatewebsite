@@ -58,7 +58,7 @@ interface Report {
 }
 
 export default function TeacherDashboard() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<{ role: string } | null>(null);
   const [students, setStudents] = useState<Student[]>([]);
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [reports, setReports] = useState<Report[]>([]);
@@ -315,7 +315,7 @@ export default function TeacherDashboard() {
                           onChange={(e) =>
                             setEditingReport({
                               ...editingReport,
-                              timeSchoolOpened: parseInt(e.target.value),
+                              timeSchoolOpened: Number(e.target.value) || 0,
                             })
                           }
                           className="input-field"
@@ -331,7 +331,7 @@ export default function TeacherDashboard() {
                           onChange={(e) =>
                             setEditingReport({
                               ...editingReport,
-                              timePresent: parseInt(e.target.value),
+                              timePresent: Number(e.target.value) || 0,
                             })
                           }
                           className="input-field"
@@ -374,7 +374,7 @@ export default function TeacherDashboard() {
                                     updateSubject(
                                       idx,
                                       "hw",
-                                      parseInt(e.target.value) || 0
+                                      Number(e.target.value) || 0
                                     )
                                   }
                                   className="w-full p-1 text-center border-0 bg-transparent"
@@ -390,7 +390,7 @@ export default function TeacherDashboard() {
                                     updateSubject(
                                       idx,
                                       "cw",
-                                      parseInt(e.target.value) || 0
+                                      Number(e.target.value) || 0
                                     )
                                   }
                                   className="w-full p-1 text-center border-0 bg-transparent"
@@ -406,7 +406,7 @@ export default function TeacherDashboard() {
                                     updateSubject(
                                       idx,
                                       "test",
-                                      parseInt(e.target.value) || 0
+                                      Number(e.target.value) || 0
                                     )
                                   }
                                   className="w-full p-1 text-center border-0 bg-transparent"
@@ -465,7 +465,7 @@ export default function TeacherDashboard() {
                               ...editingReport,
                               overall: {
                                 ...editingReport.overall,
-                                totalPossible: parseInt(e.target.value),
+                                totalPossible: Number(e.target.value) || 0,
                               },
                             })
                           }
@@ -484,7 +484,7 @@ export default function TeacherDashboard() {
                               ...editingReport,
                               overall: {
                                 ...editingReport.overall,
-                                totalScore: parseInt(e.target.value),
+                                totalScore: Number(e.target.value) || 0,
                               },
                             })
                           }
@@ -503,7 +503,7 @@ export default function TeacherDashboard() {
                               ...editingReport,
                               overall: {
                                 ...editingReport.overall,
-                                percentage: parseInt(e.target.value),
+                                percentage: Number(e.target.value) || 0,
                               },
                             })
                           }
@@ -593,7 +593,9 @@ export default function TeacherDashboard() {
 
                     {/* Effective Traits */}
                     <div>
-                      <h3 className="font-semibold mb-3 text-gray-900 dark:text-gray-100">Effective Traits</h3>
+                      <h3 className="font-semibold mb-3 text-gray-900 dark:text-gray-100">
+                        Effective Traits
+                      </h3>
                       <div className="grid md:grid-cols-2 gap-4">
                         <div>
                           <label className="block text-sm font-medium mb-1">
