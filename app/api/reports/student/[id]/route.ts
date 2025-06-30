@@ -270,18 +270,23 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const studentId = parseInt(params.id);
-
+    // Ensure params.id is a string and convert safely
+    const idParam = params.id;
+    if (typeof idParam !== "string" || !/^\d+$/.test(idParam)) {
+      return NextResponse.json(
+        { message: "Invalid student ID" },
+        { status: 400 }
+      );
+    }
+    const studentId = Number(idParam);
     if (!studentId || isNaN(studentId)) {
       return NextResponse.json(
         { message: "Invalid student ID" },
         { status: 400 }
       );
     }
-
     const reports =
       mockReportsData[studentId as keyof typeof mockReportsData] || [];
-
     return NextResponse.json({
       success: true,
       reports: reports,
