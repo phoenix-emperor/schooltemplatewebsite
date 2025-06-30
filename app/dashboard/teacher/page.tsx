@@ -57,8 +57,16 @@ interface Report {
   authorizedSignature: string;
 }
 
+// Define a proper TeacherUser type
+interface TeacherUser {
+  name: string;
+  subject: string;
+  teacherId: string;
+  role: string;
+}
+
 export default function TeacherDashboard() {
-  const [user, setUser] = useState<{ role: string } | null>(null);
+  const [user, setUser] = useState<TeacherUser | null>(null);
   const [students, setStudents] = useState<Student[]>([]);
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
   const [reports, setReports] = useState<Report[]>([]);
