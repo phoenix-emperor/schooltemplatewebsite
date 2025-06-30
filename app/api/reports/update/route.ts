@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 // In a real application, this would be stored in a database
 // For demo purposes, we'll simulate updating the mock data
-let mockReportsData = {
-  1: [
+let mockReportsData: { [key: string]: any[] } = {
+  "1": [
     // Alex Thompson
     {
       id: 1,
@@ -66,10 +66,9 @@ export async function POST(request: NextRequest) {
     let reportUpdated = false;
 
     for (const studentId in mockReportsData) {
-      const reports =
-        mockReportsData[studentId as keyof typeof mockReportsData];
+      const reports = mockReportsData[studentId];
       const reportIndex = reports.findIndex(
-        (report: any) => report.id === reportId
+        (report: any) => String(report.id) === String(reportId)
       );
 
       if (reportIndex !== -1) {
