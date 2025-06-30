@@ -49,8 +49,15 @@ interface Report {
   authorizedSignature: string;
 }
 
+// Define a proper StudentUser type
+interface StudentUser {
+  name: string;
+  studentId: string;
+  role: string;
+}
+
 export default function StudentDashboard() {
-  const [user, setUser] = useState<{ role: string } | null>(null);
+  const [user, setUser] = useState<StudentUser | null>(null);
   const [reports, setReports] = useState<Report[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
