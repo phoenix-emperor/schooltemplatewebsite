@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
     let reportUpdated = false;
 
     for (const studentId in mockReportsData) {
-      const reports = mockReportsData[studentId];
+      const reports = mockReportsData[String(studentId)];
       const reportIndex = reports.findIndex(
         (report: any) => String(report.id) === String(reportId)
       );
